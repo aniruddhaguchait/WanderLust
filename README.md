@@ -2,15 +2,18 @@
 **A full-stack travel listings & review platform inspired by Airbnb**
 
 ![Node.js](https://img.shields.io/badge/Node.js-18.x-green?logo=node.js)
-![Express.js](https://img.shields.io/badge/Express.js-Framework-black?logo=express)
+![Express](https://img.shields.io/badge/Express-5.1.0-black?logo=express)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Database-brightgreen?logo=mongodb)
-![Mongoose](https://img.shields.io/badge/Mongoose-ODM-red?logo=mongoose)
-![Passport.js](https://img.shields.io/badge/Passport.js-Authentication-blue?logo=passport)
-![EJS](https://img.shields.io/badge/EJS-Templating-orange)
+![Mongoose](https://img.shields.io/badge/Mongoose-8.19.2-red?logo=mongoose)
+
+![Passport.js](https://img.shields.io/badge/Passport.js-0.7.0-blue?logo=passport)
+![Joi](https://img.shields.io/badge/Joi-18.0.1-purple)
+![Express--Session](https://img.shields.io/badge/Express_Session-1.18.2-lightblue)
+![EJS](https://img.shields.io/badge/EJS-3.1.10-orange)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-5-purple?logo=bootstrap)
-![License](https://img.shields.io/badge/License-MIT-yellow)
+
+![License](https://img.shields.io/badge/License-ISC-yellow)
 ![Status](https://img.shields.io/badge/Status-Active-success)
-![Contributions](https://img.shields.io/badge/Contributions-Welcome-brightgreen)
 
 > Discover places. Share experiences. Travel smarter.
 
