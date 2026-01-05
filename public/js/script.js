@@ -1,3 +1,4 @@
+// Bootstrap validation
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (() => {
   'use strict'
@@ -16,4 +17,10 @@
       form.classList.add('was-validated')
     }, false)
   })
-})()
+})();
+
+// Toggle password visibility
+function togglePassword() {
+  const password = document.getElementById("password");
+  password.type = password.type === "password" ? "text" : "password";
+}
