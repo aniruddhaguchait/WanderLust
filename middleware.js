@@ -4,6 +4,7 @@ const Listing = require("./models/listing");
 const Review = require("./models/review");
 const {listingSchema, reviewSchema} = require("./schema.js");
 
+
 module.exports.validateListing = (req, res, next)=>{
     let {error} = listingSchema.validate(req.body);
     if(error){
