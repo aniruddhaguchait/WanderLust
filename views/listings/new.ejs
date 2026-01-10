@@ -4,25 +4,25 @@
         <div class="col-8 offset-2">
             <br>
             <h3 style="text-align: center;">Create a New Listing</h3>
-            <form action="/listings" method="post" class="needs-validation" novalidate>
+            <form action="/listings" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="title" class="form-label">Title:</label>
                     <input type="text" class="form-control" name="listing[title]" placeholder="e.g., Cozy 2BHK apartment" autofocus required>
                     <div class="invalid-feedback">
-                        Please choose a title.
+                        Please add a title so guests know what your place offers.
                     </div>      
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description:</label>
                     <textarea type="text" class="form-control" name="listing[description]" 
-                    placeholder="e.g., A fully furnished apartment near hill station" required></textarea>
+                    placeholder="Describe your place, nearby attractions, and what guests will love" required></textarea>
                     <div class="invalid-feedback">
-                        Please provide a brief description.
+                        Tell guests a bit more about your place.
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="image" class="form-label">Image URL:</label>
-                    <input type="text" class="form-control" name="listing[image]" placeholder="e.g., https://example.com/image.jpg">
+                    <label for="image" class="form-label">Upload Image:</label>
+                    <input type="file" class="form-control" name="listing[image]">
                     <div class="valid-feedback">
                         Image URL is not mandatory, but you should provide.
                     </div>
@@ -30,16 +30,16 @@
                 <div class="row">
                     <div class="mb-3 col-md-4">
                         <label for="price" class="form-label">Price:</label>
-                        <input type="number" class="form-control" name="listing[price]" placeholder="e.g., 2500"  required>
+                        <input type="number" class="form-control" name="listing[price]" placeholder="₹ Price per night"  required>
                         <div class="invalid-feedback">
-                            Please choose a price.
+                            Enter a valid nightly price in INR.
                         </div>
                     </div>
                     <div class="mb-3 col-md-8">
                         <label for="location" class="form-label">Location:</label>
-                        <input type="text" class="form-control" name="listing[location]" placeholder="e.g., Darjeeling" required>
+                        <input type="text" class="form-control" name="listing[location]" placeholder="City or area (e.g. Darjeeling)" required>
                         <div class="invalid-feedback">
-                            Please provide a valid location.
+                            Where is your place located?
                         </div>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                     <label for="country" class="form-label">Country:</label>
                     <input type="text" class="form-control" name="listing[country]" placeholder="e.g., India"  required>
                     <div class="invalid-feedback">
-                        Please enter country.
+                        Helps guests find your listing in the right region.
                     </div>
                 </div>
                 <br>
