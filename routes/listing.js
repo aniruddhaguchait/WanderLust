@@ -36,6 +36,7 @@ router.route("/:id")
         isLoggedIn,
         validateObjectId,
         isOwner,
+        upload.single('listing[image]'),
         validateListing,
         wrapAsync(listingController.updateListing)
     )

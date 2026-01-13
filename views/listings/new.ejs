@@ -22,9 +22,9 @@
                 </div>
                 <div class="mb-3">
                     <label for="image" class="form-label">Upload Image:</label>
-                    <input type="file" class="form-control" name="listing[image]">
-                    <div class="valid-feedback">
-                        Image URL is not mandatory, but you should provide.
+                    <input type="file" class="form-control" name="listing[image]" required>
+                    <div class="invalid-feedback">
+                        Provide a Image of less than 10MB.
                     </div>
                 </div>
                 <div class="row">
