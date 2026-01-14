@@ -111,3 +111,9 @@ body{
 /* .card-text b{
     font-size: 1.5rem;
 } */
+
+/* Map */
+#map { 
+    height: 400px;
+    width: 80vh;
+}
