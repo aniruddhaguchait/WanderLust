@@ -1,18 +1,68 @@
-mapboxgl.accessToken = mapToken;
+if (listing.geometry) {
+  const [lng, lat] = listing.geometry.coordinates;
 
-const map = new mapboxgl.Map({
-    container: 'map', // container ID
-    style: "mapbox://styles/mapbox/streets-v12",
-    center: listing.geometry.coordinates, // starting position [lng, lat]. Note that lat must be set between -90 and 90
-    zoom: 9, // starting zoom
-});
+  const street = L.tileLayer(
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    { 
+      attribution:
+        '© OpenStreetMap contributors', 
+      maxZoom: 19,
+    }
+  );
 
-const marker1 = new mapboxgl.Marker({ color: '#fe424d' })
-    .setLngLat(listing.geometry.coordinates)
-    .setPopup(
-        new mapboxgl.Popup({offset: 25})
-        .setHTML(
-            `<h4>${listing.title}</h4><p>Exact Location will be provided after booking!</p>`
-        )
-    )
-    .addTo(map);
+  const satellite = L.tileLayer(
+    'https://server.arcgisonline.com/ArcGIS/rest/services/' +
+    'World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    {
+      attribution:
+        'Tiles © Esri — Source: Esri, Maxar, Earthstar Geographics',
+      maxZoom: 19,
+    }
+  );
+
+  const map = L.map('map', {
+    center: [lat, lng],
+    zoom: 15,
+    scrollWheelZoom: false,
+    layers: [street],
+  });
+
+  const baseMaps = {
+    "Street": street,
+    "Satellite": satellite,
+  };
+
+  L.control.layers(baseMaps, null, { position: 'topright' }).addTo(map);
+
+  
+   // Custom red marker (#fe424d)
+  const heartMarker = L.divIcon({
+    className: 'custom-marker',
+    html: `<span class="material-symbols-outlined"
+            style="
+            font-size: 42px;
+            color: #fe424d;
+            line-height: 1;
+          ">
+            map_pin_heart
+          </span>
+  `,
+    iconSize: [36, 36],
+    iconAnchor: [18, 36],
+    popupAnchor: [0, -36],
+  });
+
+  L.marker([lat, lng], { icon: heartMarker })
+    .addTo(map)
+    .bindPopup(`
+      <div style="text-align:center">
+        <h5 style="color:#fe424d; font-size:16px; ">
+          ${listing.title}
+        </h5>
+        <p>
+          📍 Exact location will be shared after booking
+        </p>
+      </div>
+    `)
+    .openPopup();
+};
