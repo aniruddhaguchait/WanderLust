@@ -1,40 +1,5 @@
 <% layout('/layouts/boilerplate')%>
 <body>
-    <style>
-        #filters {
-            margin-top: 1rem;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            margin-left: 1rem;
-        }
-        .filter{
-            text-align: center;
-            margin-right: 2rem;
-            opacity: 0.8;
-        }
-        .filter:hover, .tax-toggle:hover, .filter-switch:hover{
-            opacity:1;
-            cursor:pointer;
-        }
-        .filter p{
-            font-size: 0.8rem;
-        }
-        .tax-info {
-            display: none;
-        }
-        .tax-toggle, .filter-switch {
-            border: 1px solid black ;
-            border-radius: 1rem;
-            height: 3rem;
-            margin: -10px 0.75rem 0.5rem 0;
-            padding: 3px 12px 8px 12px;
-            opacity: 0.9;
-        }
-        .filter-switch {
-            padding-top: 0.75rem;
-        }
-    </style>
     <div id="filters">
         <div class="filter">
             <div><i class="fa-solid fa-fire"></i></div>
@@ -117,17 +82,4 @@
             </a>
         <%}%>
     </div>
-    <script>
-        let taxSwitch = document.getElementById("flexSwitchCheckDefault");
-        taxSwitch.addEventListener("click", ()=>{
-            let taxInfo = document.getElementsByClassName("tax-info");
-            for(info of taxInfo) {
-                if( info.style.display != "inline" ) {
-                    info.style.display = "inline";
-                } else {
-                    info.style.display = "none";
-                }
-            }
-        })
-    </script>
 </body>
