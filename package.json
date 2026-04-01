@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "20.19.6"
+  },
   "name": "wanderlust",
   "version": "1.0.0",
   "description": "",
@@ -13,6 +16,7 @@
   "dependencies": {
     "cloudinary": "^1.41.3",
     "connect-flash": "^0.1.1",
+    "connect-mongo": "^6.0.0",
     "dotenv": "^17.2.3",
     "ejs": "^3.1.10",
     "ejs-mate": "^4.0.0",
@@ -20,6 +24,7 @@
     "express-session": "^1.18.2",
     "joi": "^18.0.1",
     "method-override": "^3.0.0",
+    "mongodb": "^7.1.0",
     "mongoose": "^8.19.2",
     "multer": "^2.0.2",
     "multer-storage-cloudinary": "^4.0.0",

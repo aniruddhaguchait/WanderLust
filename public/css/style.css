@@ -137,9 +137,12 @@ margin-right: 0.5rem;
 }
 
 .search-input {
-border-radius: 1.5rem;
 padding: 0.5rem 2rem 0.5rem;
 width: 25rem;
+}
+
+.search-input:hover {
+    border-radius: 1.5rem;
 }
 
 /* Filters */
