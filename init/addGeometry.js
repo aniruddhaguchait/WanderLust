@@ -1,7 +1,13 @@
+if (process.env.NODE_ENV != "production") {
+    require("dotenv").config({ path: "../.env" });
+}
+
 const mongoose = require("mongoose");
 const Listing = require("../models/listing");
 
-mongoose.connect("mongodb://127.0.0.1:27017/wanderlust");
+const MONGO_URL = process.env.ATLAS_DB_URL;
+
+mongoose.connect(MONGO_URL);
 
 async function addGeometry() {
   const listings = await Listing.find({
@@ -22,13 +28,14 @@ async function addGeometry() {
 
     const res = await fetch(url, {
       headers: {
-        "User-Agent": "wanderlust-app"
+        "User-Agent": "Wanderlust App - contact: aniruddhaguchait13@gmail.com",
+        "Accept": "application/json"
       }
     });
 
     const data = await res.json();
 
-    if (data.length > 0) {
+    if (data.length > 0 ) {
       listing.geometry = {
         type: "Point",
         coordinates: [
@@ -37,10 +44,13 @@ async function addGeometry() {
         ]
       };
 
-      await listing.save();
-      console.log(`✔ Updated: ${listing.title}`);
-    } else {
-      console.log(`✖ No result for: ${listing.title}`);
+      try {
+        await listing.save();
+        console.log(`✔ Updated: ${listing.title}`);
+      } catch (err) {
+        console.log("Save failed for:", listing.title);
+        console.log(err.message);
+      }
     }
   }
 
