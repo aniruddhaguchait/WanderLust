@@ -1,51 +1,69 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const Review = require("./review.js");
+const Review = require("./Review.js");
+const { CATEGORIES, TAX_RATE } = require("../utils/constants");
 
 const listingSchema = new Schema({
-  title: {
-    type: String,
-    required: true,
-  },
-  description: String,
-  image: {
-    url: {
-      type: String,
+    title: {
+        type: String,
+        required: true,
+        trim: true,
+        maxLength: 100
     },
-    filname: {
-      type: String,
+    description: {
+        type: String,
+        trim: true,
+        maxLength: 2000
     },
-  },
-  price: Number,
-  location: String,
-  country: String,
-  reviews: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Review",
+    image: {
+        url: String,
+        filename: String
+    },
+    price: {
+        type: Number,
+        min: 0
+    },
+    location: String,
+    country: String,
+    category: {
+        type: String,
+        enum: CATEGORIES,
+        required: true
+    },
+    reviews: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Review",
+        }
+    ],
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+    },
+    geometry: {
+        type: {
+            type: String,
+            enum: ['Point']
+        },
+        coordinates: {
+            type: [Number]
+        }
     }
-  ],
-  owner: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-  },
-  geometry: {
-    type: {
-      type: String, // Don't do `{ location: { type: String } }`
-      enum: ['Point'], // 'location.type' must be 'Point'
-      required: true
-    },
-    coordinates: {
-      type: [Number],
-      required: true
-    }
-  }
+}, { timestamps: true });
+
+// Virtual for tax-inclusive price
+listingSchema.virtual('priceWithTax').get(function() {
+    if (!this.price) return 0;
+    return Math.round(this.price * (1 + TAX_RATE));
 });
 
-listingSchema.post("findOneAndDelete", async(listing)=>{
-  if (listing) {
-    await Review.deleteMany({_id: {$in: listing.reviews}});
-  }
+// Geo JSON Index for geospatial queries
+listingSchema.index({ geometry: '2dsphere' });
+
+listingSchema.post("findOneAndDelete", async (listing) => {
+    if (listing) {
+        await Review.deleteMany({ _id: { $in: listing.reviews } });
+    }
 });
 
 const Listing = mongoose.model("Listing", listingSchema);

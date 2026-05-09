@@ -4,21 +4,16 @@ const Schema = mongoose.Schema;
 const reviewSchema = new Schema({
     comment: String,
     rating: {
-        type:Number,
+        type: Number,
         min: 1,
         max: 5,
-        required:true,
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now()
+        required: true,
     },
     author: {
         type: Schema.Types.ObjectId,
         ref: "User",
     }
-},
-{timestamps: true});
+}, { timestamps: true });
 
 const Review = mongoose.model("Review", reviewSchema);
 module.exports = Review;

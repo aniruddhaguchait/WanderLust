@@ -1,5 +1,4 @@
 <% layout('/layouts/boilerplate')%>
-<body>
     <div class="row">
         <div class="col-8 offset-2">
             <h3 style="text-align: center;">Edit Listing</h3>
@@ -18,22 +17,40 @@
                         Tell guests a bit more about your place.
                     </div>
                 </div>
+                
+                <% if(originalImageUrl) { %>
                 <div class="mb-3">
                     Current Listing Image:
                     <div class="mt-2" style="max-width: 320px;">
-                        <img src="<%= originalImageUrl %>"
-                        class="card-img-top rounded"
-                            alt="Current listing image"
-                        >
+                        <img src="<%= originalImageUrl %>" class="card-img-top rounded" alt="Current listing image">
                     </div>
                 </div>
-                <div class="mb-3">
-                    <label for="image" class="form-label">Upload New Image:</label>
-                    <input type="file" class="form-control" name="listing[image]">
-                    <div class="invalid-feedback">
-                        Provide a Image of less than 10MB.
+                <% } %>
+
+                <div class="row">
+                    <div class="mb-3 col-md-6">
+                        <label for="image" class="form-label">Upload New Image (Optional):</label>
+                        <input type="file" class="form-control" name="listing[image]">
+                        <div class="invalid-feedback">
+                            Provide an Image of less than 10MB.
+                        </div>
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <label for="category" class="form-label">Category:</label>
+                        <select name="listing[category]" class="form-select" required>
+                            <% 
+                            const categories = ["trending", "rooms", "hills", "beach", "camping", "nature", "arctic", "hotels", "forts", "hot", "jungle", "cities"];
+                            for(let cat of categories) { 
+                            %>
+                                <option value="<%= cat %>" <%= listing.category === cat ? 'selected' : '' %>><%= cat.charAt(0).toUpperCase() + cat.slice(1) %></option>
+                            <% } %>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a category.
+                        </div>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="mb-3 col-md-4">
                         <label for="price" class="form-label">Price:</label>
@@ -62,4 +79,3 @@
             </form>       
         </div>
     </div>
-</body>
