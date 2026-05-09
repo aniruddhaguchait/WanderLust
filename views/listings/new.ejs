@@ -1,0 +1,81 @@
+<% layout('/layouts/boilerplate')%>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <br>
+            <h3 style="text-align: center;">Create a New Listing</h3>
+            <form action="/listings" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title:</label>
+                    <input type="text" class="form-control" name="listing[title]" placeholder="e.g., Cozy 2BHK apartment" autofocus required>
+                    <div class="invalid-feedback">
+                        Please add a title so guests know what your place offers.
+                    </div>      
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description:</label>
+                    <textarea type="text" class="form-control" name="listing[description]" 
+                    placeholder="Describe your place, nearby attractions, and what guests will love" required></textarea>
+                    <div class="invalid-feedback">
+                        Tell guests a bit more about your place.
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="mb-3 col-md-6">
+                        <label for="image" class="form-label">Upload Image:</label>
+                        <input type="file" class="form-control" name="listing[image]">
+                        <div class="invalid-feedback">
+                            Provide an Image of less than 10MB.
+                        </div>
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <label for="category" class="form-label">Category:</label>
+                        <select name="listing[category]" class="form-select" required>
+                            <option value="" disabled selected>Select a category</option>
+                            <option value="trending">Trending</option>
+                            <option value="rooms">Rooms</option>
+                            <option value="hills">Hills</option>
+                            <option value="beach">Beach</option>
+                            <option value="camping">Camping</option>
+                            <option value="nature">Nature</option>
+                            <option value="arctic">Arctic</option>
+                            <option value="hotels">Hotels</option>
+                            <option value="forts">Forts</option>
+                            <option value="hot">Hot</option>
+                            <option value="jungle">Jungle</option>
+                            <option value="cities">Cities</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a category.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label for="price" class="form-label">Price:</label>
+                        <input type="number" class="form-control" name="listing[price]" placeholder="₹ Price per night"  required>
+                        <div class="invalid-feedback">
+                            Enter a valid nightly price in INR.
+                        </div>
+                    </div>
+                    <div class="mb-3 col-md-8">
+                        <label for="location" class="form-label">Location:</label>
+                        <input type="text" class="form-control" name="listing[location]" placeholder="City or area (e.g. Darjeeling)" required>
+                        <div class="invalid-feedback">
+                            Where is your place located?
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="country" class="form-label">Country:</label>
+                    <input type="text" class="form-control" name="listing[country]" placeholder="e.g., India"  required>
+                    <div class="invalid-feedback">
+                        Helps guests find your listing in the right region.
+                    </div>
+                </div>
+                <br>
+                <button class="btn btn-dark">Add Listing</button> <br> <br>
+            </form>       
+        </div>
+    </div>

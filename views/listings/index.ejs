@@ -1,0 +1,86 @@
+<% layout('/layouts/boilerplate')%>
+    <div id="filters">
+        <% 
+        const categories = [
+            { id: "trending", icon: "fa-fire", label: "Trending" },
+            { id: "rooms", icon: "fa-bed", label: "Rooms" },
+            { id: "hills", icon: "fa-mountain-city", label: "Hills" },
+            { id: "beach", icon: "fa-umbrella-beach", label: "Beach" },
+            { id: "camping", icon: "fa-campground", label: "Camping" },
+            { id: "nature", icon: "fa-bluesky", label: "Nature" },
+            { id: "arctic", icon: "fa-snowflake", label: "Arctic" },
+            { id: "hotels", icon: "fa-hotel", label: "Hotels" },
+            { id: "forts", icon: "fa-fort-awesome-alt", label: "Forts" },
+            { id: "hot", icon: "fa-periscope", label: "Hot" },
+            { id: "jungle", icon: "fa-tree", label: "Jungle" },
+            { id: "cities", icon: "fa-archway", label: "Cities" }
+        ];
+        %>
+        
+        <% for(let cat of categories) { %>
+            <a href="/listings?category=<%= cat.id %><%= q ? '&q=' + q : '' %>" style="text-decoration: none; color: inherit;">
+                <div class="filter <%= category === cat.id ? 'active-filter' : '' %>">
+                    <div><i class="fa-solid <%= cat.icon %>"></i></div>
+                    <p><%= cat.label %></p>
+                </div>
+            </a>
+        <% } %>
+
+        <% if (category || q) { %>
+            <a href="/listings" class="btn btn-sm btn-outline-secondary ms-2 mb-3">Clear Filters</a>
+        <% } %>
+
+        <div class="tax-toggle ms-auto">
+            <div class="form-check-reverse form-switch mt-2">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
+            </div>
+        </div>
+    </div>
+
+    <% if (allListings.length === 0) { %>
+        <div class="alert alert-warning mt-4 text-center">
+            <h4>No listings found!</h4>
+            <p>Try adjusting your search or category filters.</p>
+            <a href="/listings" class="btn btn-dark">View All Listings</a>
+        </div>
+    <% } else { %>
+        <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-xs-1 mt-3">
+            <%for(let listing of allListings){%>
+                <a href="/listings/<%= listing.id %>" class="listing-link">
+                    <div class="card col listing-card" >
+                        <% if(listing.image && listing.image.url) { %>
+                            <img src="<%= listing.image.url.replace('/upload', '/upload/w_600,h_400,c_fill') %>" class="card-img-top" alt="<%=listing.title%>" style="height: 20rem;">
+                        <% } else { %>
+                            <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=600&h=400&q=60" class="card-img-top" alt="Placeholder" style="height: 20rem;">
+                        <% } %>
+                        <div class="card-body">
+                            <p class="card-text">
+                                <b><%= listing.title %></b> <br>
+                                &#x20B9;<%= listing.price ? listing.price.toLocaleString("en-IN") : '0'%> / night
+                                <i class="tax-info">&nbsp; + 18% GST (&#x20B9;<%= listing.priceWithTax ? listing.priceWithTax.toLocaleString("en-IN") : '0' %>)</i>
+                            </p>
+                        </div>
+                    </div>          
+                </a>
+            <%}%>
+        </div>
+
+        <% if (totalPages > 1) { %>
+            <nav aria-label="Page navigation" class="mt-4 mb-5">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item <%= currentPage === 1 ? 'disabled' : '' %>">
+                        <a class="page-link" href="/listings?page=<%= currentPage - 1 %><%= category ? '&category=' + category : '' %><%= q ? '&q=' + q : '' %>">Previous</a>
+                    </li>
+                    <% for(let i = 1; i <= totalPages; i++) { %>
+                        <li class="page-item <%= currentPage === i ? 'active' : '' %>">
+                            <a class="page-link" href="/listings?page=<%= i %><%= category ? '&category=' + category : '' %><%= q ? '&q=' + q : '' %>"><%= i %></a>
+                        </li>
+                    <% } %>
+                    <li class="page-item <%= currentPage === totalPages ? 'disabled' : '' %>">
+                        <a class="page-link" href="/listings?page=<%= currentPage + 1 %><%= category ? '&category=' + category : '' %><%= q ? '&q=' + q : '' %>">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        <% } %>
+    <% } %>
